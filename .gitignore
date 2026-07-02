@@ -1,0 +1,15 @@
+# Eval / test workspace outputs
+*-workspace/
+
+# Simulation artifacts
+*.vcd
+*.fst
+*.fsdb
+*.wlf
+
+# Test fixtures
+test/fixtures/
+
+# Python cache
+__pycache__/
+*.pyc
