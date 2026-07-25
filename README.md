@@ -83,3 +83,7 @@ where each skill defines:
 Each skill has an `evals/` directory with test prompts and assertions. Eval runs use the skill-creator framework: subagents execute prompts with and without the skill, outputs are graded against assertions.
 
 Workspace outputs (`*-workspace/`), simulation artifacts (`*.vcd`), and test fixture files are git-ignored.
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
