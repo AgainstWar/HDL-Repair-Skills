@@ -86,4 +86,4 @@ Workspace outputs (`*-workspace/`), simulation artifacts (`*.vcd`), and test fix
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+MIT License. See [LICENSE](LICENSE.md) for details.
