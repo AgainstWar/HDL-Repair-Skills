@@ -30,25 +30,31 @@ See `hdl-fault-localization/SKILL.md` for the full procedure, constraints, outpu
 
 Eval results (iteration 2): **18/18 (100%)** with-skill vs 10/18 (56%) without-skill across 3 HDL bug scenarios (FIFO pointer, AXI pipeline, FSM stuck).
 
-### 2. HDL Minimal Repair and Consistency Check
+### 2. HDL Repair Review — V2 Draft
 
-**Status**: In progress.
+**Status**: Draft (`2.0.0-draft.1`); not yet experimentally evaluated.
 
-This skill guides the agent to produce a small, evidence-backed patch and check its side effects.
+This skill supports the agent's current repair idea or candidate patch with
+focused review of the changed logic and directly related behavior. A concrete
+contradiction triggers deeper analysis. It favors local correction when the
+repair direction remains valid, and allows a new hypothesis when evidence
+contradicts the current one.
 
-It asks the agent to:
+The agent decides implementation scope, environment preparation, validation,
+response to test failures, and when to finish. The skill uses general review
+principles rather than a fixed HDL checklist or a mandatory localization step.
 
-- select a root-cause hypothesis (from Skill 1's output)
-- make the smallest necessary patch
-- check ready/valid, reset, flush, replay, and FSM side effects
-- check related configuration or generated artifacts when needed
-- record the patch decision and remaining risks
+Main output: a brief explanation of the changes, their rationale, and actual
+validation results.
 
-Main output: **Patch Decision Note**.
+The existing `hdl-minimal-repair` identifier is retained. See
+[`hdl-minimal-repair/SKILL.md`](hdl-minimal-repair/SKILL.md) for the draft.
+Here, V2 denotes the skill revision, independently of experimental model-cohort
+labels.
 
 ## Design
 
-Skills follow the LEGO-style skill abstraction:
+The original skills follow the LEGO-style skill abstraction:
 
 S = (N, F, C, P, IO, Σ, G)
 
@@ -61,6 +67,9 @@ where each skill defines:
 - IO: input and output
 - Σ: output schema
 - G: completion criteria
+
+The Repair V2 draft instead uses flexible review principles and a brief summary,
+without a fixed procedure, output schema, or completion checklist.
 
 ## Repository Layout
 
@@ -80,7 +89,10 @@ where each skill defines:
 
 ## Testing
 
-Each skill has an `evals/` directory with test prompts and assertions. Eval runs use the skill-creator framework: subagents execute prompts with and without the skill, outputs are graded against assertions.
+The localization skill has an `evals/` directory with test prompts and assertions.
+Its eval runs use the skill-creator framework: subagents execute prompts with and
+without the skill, and outputs are graded against assertions. The Repair V2 draft
+has not yet undergone behavioral or benchmark evaluation.
 
 Workspace outputs (`*-workspace/`), simulation artifacts (`*.vcd`), and test fixture files are git-ignored.
 
